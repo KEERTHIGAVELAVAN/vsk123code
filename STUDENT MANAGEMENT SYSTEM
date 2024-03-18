@@ -1,0 +1,169 @@
+#include<stdio.h> 
+#include<stdlib.h> 
+#include<string.h>
+struct Student 
+{
+int rollno;
+char name[30]; 
+char dept[40];
+double cgpa;
+ }s[100]; 
+int no; 
+void addStudent();
+void delStudent(); 
+void modifyStudent();
+void search Student(); 
+void sort Student(); 
+void displayStudent();
+int main()
+ { 
+int option; 
+printf("********************SMVEC STUDENT MANAGEMENT SYSTEM*********\n"); 
+for(;;) 
+{ 
+printf("1.Add Student\n"); 
+printf("2.Display Student\n");
+printf("3.Modify Student\n");
+printf("4.Delete Student\n");
+ printf("5.Search Student\n");
+ 
+
+printf("6.Sort Students\n"); 
+printf("Enter your option\n"); 
+scanf("%d",&option); 
+switch(option) 
+{ 
+case 1: 
+addStudent();
+ break; 
+case 2: 
+displayStudent(); 
+break;
+ case 3:
+ modifyStudent();
+ break; 
+case 4: 
+delStudent(); 
+break; 
+case 5: 
+searchStudent();
+ break; 
+case 6:
+ sortStudent(); 
+break;
+ default: 
+printf("Please enter the valid choice!");
+exit(0); 
+} 
+}
+}
+void addStudent()
+ { 
+printf("Enter the number of students:\n"); 
+scanf("%d",&no); 
+printf("Enter student details one by one!:\n");
+for(int i=0;i<no;i++) 
+{
+ printf("Enter the rollno:\n"); 
+scanf("%d",&s[i].rollno); 
+printf("Enter name:\n");
+ scanf("%s",s[i].name);
+ printf("Enter the department:\n"); 
+scanf("%s",s[i].dept); 
+printf("Enter the cgpa:\n");
+ scanf("%lf",&s[i].cgpa);
+} 
+} 
+void displayStudent()
+ { 
+printf("Displaying student details!\n"); 
+for(int i=0;i<no;i++)
+ { 
+printf("Roll no : %d\n",s[i].rollno);
+ printf("Name of the student: %s\n",s[i].name); 
+printf("Department:%s\n",s[i].dept); 
+printf("Cgpa of the student:%lf\n",s[i].cgpa);
+ } 
+}
+
+
+void modifyStudent()
+ { 
+int r;
+ printf("Enter the roll no for modification?\n"); 
+scanf("%d",&r);
+for(int i=0;i<no;i++) 
+{
+ if(r==s[i].rollno)
+ { 
+printf("Enter name:\n");
+ scanf("%s",s[i].name); 
+printf("Enter the department:\n"); 
+scanf("%s",s[i].dept)
+; printf("Enter the cgpa:\n"); 
+scanf("%lf",&s[i].cgpa);
+ }
+ } 
+} 
+void delStudent() 
+{
+ int r;
+ printf("Enter rollno to delete ?"); 
+scanf("%d",&r);
+ for(int i=0;i<no;i++)
+ {
+ if(r == s[i].rollno)
+ {
+ s[i].rollno=0; 
+strcpy(s[i].name,""); 
+strcpy(s[i].dept,"");
+ s[i].cgpa =0.0;
+} 
+}
+}
+void searchStudent() 
+{
+ int i; int r; int count=0;
+ printf("Enter rollno ?"); 
+scanf("%d",&r);
+ for(i=0;i<no;i++) 
+{ 
+if(r == s[i].rollno) 
+{ 
+count++; 
+printf("Rollno = %d\n",s[i].rollno); 
+printf("name = %s\n",s[i].name); 
+printf("department = %s\n",s[i].dept);
+ printf("cgpa = %lf\n",s[i].cgpa); 
+} 
+ } 
+if(count==0) 
+printf("Data not found\n");
+}
+void sortStudent() 
+{ 
+ int rno; 
+char na[30]; 
+char dpt[30]; 
+double gpa;
+ for(int i=0;i<no-1;i++)
+ {
+ for(int j=i+1;j<no;j++)
+ { 
+if(strcmp(s[i].name,s[j].name) > 0)
+ { 
+rno=s[i].rollno; 
+strcpy(na,s[i].name);
+ strcpy(dpt,s[i].dept); 
+gpa=s[i].cgpa;
+s[i].rollno=s[j].rollno;
+ strcpy(s[i].name,s[j].name); 
+strcpy(s[i].dept,s[j].dept);
+ s[i].cgpa=s[j].cgpa; 
+s[j].rollno = rno;
+ strcpy(s[j].name,na);
+ strcpy(s[j].dept,dpt); 
+s[j].cgpa = gpa; 
+}
+} } displayStudent();
+}
